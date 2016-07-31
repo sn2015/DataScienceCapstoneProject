@@ -5,16 +5,13 @@
 # file "badwords.txt" should exist in the working directory
 # library tm and quanteda are necessary for transformation 
 # object cleanedset is the output of this function, it only exist in working environment
+#
 # cleanedset looks like this:
 # [1] "btw thank rt gonna dc anytim soon love see wai wai long"
 # [2] "get anoth dai skool due wonder snow wake thing"         
 # [3] "coo ju work hella tire r u ever cali"                   
 # [4] "need reconnect week"                                    
 # [5] "dammnnnnn catch"     
-
-
-
-
 
 library(tm)
 library(quanteda)
@@ -58,4 +55,3 @@ cleanedset <<- x1
 
 rm(x1, i)
 }
-

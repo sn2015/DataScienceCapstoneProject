@@ -9,8 +9,9 @@ I will explore training set and train my model on it and test set will be used t
 
 here i put some exploratory analysis.
 
-Then i create a function called "clean" which take as the argument a text string or collection of text strings 
+I create a function called "clean" which take as the argument a text string or collection of text strings 
 and remove foreign words, removing badwords, stripwhitespaces, remove numbers and punctuation, steming text using "porter" method.
 Object cleanedset is the output of this function.
 
-
+Then I create a model, maybe several models and test them.
+What my model should have as an input? A sentence.
