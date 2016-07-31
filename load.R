@@ -51,8 +51,10 @@ testset <- sample[!as.logical(sampleline)]
 
 rm(sampleline, sample)
 
-write.csv(trainset, file = "trainset.csv")
-write.csv(testset, file = "testset.csv")
+write(trainset, file = "trainset.txt")
+write(testset, file = "testset.txt")
 
-str(trainset)
-trainset[1:5]
+# str(trainset)
+# trainset[1:5]
+# rm(trainset, testset)
+
