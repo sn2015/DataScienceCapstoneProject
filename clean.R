@@ -1,10 +1,10 @@
-## here i create a function called "clean" which make nessecery preparations to the argument
+## here i create a function called "clean" which makes nessecery preparations to the argument
 # it takes a text string or collection of text strings and remove foreign words, removing badwords,
 # stripwhitespaces, remove numbers and punctuation, 
 # steming "porter" method
 # file "badwords.txt" should exist in the working directory
 # library tm and quanteda are necessary for transformation 
-# object cleanedset is the output of this function, it only exist in working environment
+# object cleanedset is the output of this function, it only in working environment
 #
 # cleanedset looks like this:
 # [1] "btw thank rt gonna dc anytim soon love see wai wai long"
@@ -55,3 +55,4 @@ cleanedset <<- x1
 
 rm(x1, i)
 }
+
