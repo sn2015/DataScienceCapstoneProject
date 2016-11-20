@@ -1,6 +1,7 @@
 #### this script contains funcions for creating n-gram's
 #### library needed: quanteda, dplyr
-# ngram function is a function of one argument x which is a text string or 
+# two functions is a result of this script: createbigramand createtrigram.
+# they are a functions of one argument x which is a text string or 
 # collection of text strings
 # output is an object bigram or trigram in global environmennt 
 # a data frame with columns count, word1, ..., wordn.  
@@ -36,8 +37,6 @@ Dfm2 <- dfm(tokens);
 bigram <- data.frame(words = names(topfeatures(Dfm2, dim(Dfm2)[2])), row.names = NULL,
                      count = topfeatures(Dfm2, dim(Dfm2)[2]), stringsAsFactors = FALSE)
 
-bigram <- filter(bigram, count > 1)
-
 first <- function(x){x[2]}
 second <- function(x){x[1]}
 
@@ -64,19 +63,8 @@ Dfm3 <- dfm(tokens);
 trigram <- data.frame(words = names(topfeatures(Dfm3, dim(Dfm3)[2])), row.names = NULL,
                       count = topfeatures(Dfm3, dim(Dfm3)[2]), stringsAsFactors = FALSE)
 
-trigram <- filter(trigram, count > 1)
-
-first <- function(x){x[3]}
-second <- function(x){x[2]}
-third <- function(x){x[1]}
-
-trigram <- trigram %>% mutate(words = strsplit(words, split = "_")) %>%
-  mutate(word3 = sapply(words, third)) %>%
-  mutate(word2 = sapply(words, second)) %>% 
-  mutate(word1 = sapply(words, first)) %>% select(-words)
-
 trigram <<- trigram
 # head(trigram); tail(trigram)
-rm(Dfm3, tokens, first, second, third)
+rm(Dfm3, tokens)
 }
 

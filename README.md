@@ -13,7 +13,7 @@ I create a script with a function called "clean" which take as the argument a te
 function "clean" remove foreign words, removing badwords, stripwhitespaces, remove numbers and punctuation, it can also stems text using "porter" method.
 Object cleanedset is the output of this function.
 
-I write ascript that contains funcions for creating n-gram's
+I write a script that contains functions for creating n-gram's
 Functions of one argument x which is a text string or collection of text strings
 Output is a saved file (data frame) in the working directory 
 A data frame with columns count, word1, ..., wordn.  
