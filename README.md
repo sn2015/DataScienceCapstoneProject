@@ -10,7 +10,7 @@ I will explore training set and train my model on it. And test set will be used 
 *here i put some exploratory analysis*
 
 I create a script with a function called "clean" which take as the argument a text string or collection of text strings 
-and remove foreign words, removing badwords, stripwhitespaces, remove numbers and punctuation, steming text using "porter" method.
+function "clean" remove foreign words, removing badwords, stripwhitespaces, remove numbers and punctuation, it can also stems text using "porter" method.
 Object cleanedset is the output of this function.
 
 I write ascript that contains funcions for creating n-gram's

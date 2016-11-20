@@ -1,10 +1,11 @@
 ## here i create a function called "clean" which makes nessecery preparations to the argument
-# it takes a text string or collection of text strings and remove foreign words, removing badwords,
+# it takes a text string or collection of text strings and
+# remove foreign words, removing badwords,
 # stripwhitespaces, remove numbers and punctuation, 
-# steming "porter" method
+# stems using "porter" method or not if lines are comment
 # file "badwords.txt" should exist in the working directory
 # library tm and quanteda are necessary for transformation 
-# object cleanedset is the output of this function, it only in working environment
+# object cleanedset is the output of this function, it exists only in working environment
 #
 # cleanedset looks like this:
 # [1] "btw thank rt gonna dc anytim soon love see wai wai long"
@@ -36,7 +37,7 @@ close(con)
 x <- removeWords(x, words = badwords)
 rm(badwords, con)
 
-x <- removeWords(x, words = stopwords("english")) 
+# x <- removeWords(x, words = stopwords("english")) 
 x <- removePunctuation(x)
 x <- removeNumbers(x)
 x <- stripWhitespace(x)
@@ -44,15 +45,16 @@ x <- sub("^ ", "", x)
 x <- sub(" $", "", x)
 x <- x[!x ==""] # removing blank rows "5-th!" become "" after all
 
-x <- tokenize(x)
-x <- wordstem(x, language = "porter")
+cleanedset <<- x
 
-x1 <- character(length(x))
-for (i in 1:length(x)) {
-  x1[i] <- paste(unlist(x[i]), collapse = " ")
+# following 8 lines stems or not if comments
+# x <- tokenize(x)
+# x <- wordstem(x, language = "porter")
+# x1 <- character(length(x))
+# for (i in 1:length(x)) {
+#   x1[i] <- paste(unlist(x[i]), collapse = " ")
+# }
+# cleanedset <<- x1
+# rm(x1, i)
+
 }
-cleanedset <<- x1
-
-rm(x1, i)
-}
-
