@@ -17,7 +17,7 @@ system.time({
 # model
 phrase <- unlist(strsplit(phrase, split = " "))
 length(phrase)
-phrase <- phrase[(length(phrase) - 3):(length(phrase) - 1)]
+phrase <- phrase[(length(phrase) - 2):(length(phrase) -1)]
 
 
 # phrase = wordn + ... + word3 + word2 + word1 after cleaning 
@@ -63,6 +63,9 @@ finalunigram <- finalunigram %>% mutate(p1 = pconti * lambda) %>%
 # user  system elapsed 
 # 0.71    0.00    0.70 
 
+# here i reduce unigram length to bigram length 
+# i think that other words have very small probabilities  
+# finalunigram <- finalunigram[finalunigram$word1 %in% modelbigram$word1, ]
 
 # here i combine unigram continuation probability multiplied by lambda with bigram probability 
 modelbigram <- modelbigram %>% select( - count)
@@ -71,7 +74,7 @@ modelbigram$p2[is.na(modelbigram$p2)] <- 0
 modelbigram <- modelbigram %>% mutate(p2 = p2 + p1) %>% select( -c(p1)) %>% arrange(desc(p2))
 # head(modelbigram)
 
-})
+
 # user  system elapsed 
 # 8.00    0.05    8.05 
 
@@ -104,3 +107,4 @@ if (dim(modeltrigram)[1] == 0) {
         modeltrigram$p3[is.na(modeltrigram$p3)] <- 0
         final <- modeltrigram %>% mutate(p3 = p3 + p2) %>% select(- c(p2)) %>% arrange(desc(p3))
 }
+})
