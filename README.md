@@ -10,16 +10,12 @@ I will explore training set and train my model on it. And test set will be used 
 *here i put some exploratory analysis*
 
 I create a script with a function called "clean" which take as the argument a text string or collection of text strings 
-function "clean" remove foreign words, removing badwords, stripwhitespaces, remove numbers and punctuation, it can also stems text using "porter" method.
+function "clean" do sentence detaction, remove foreign words, stripwhitespaces, remove numbers and punctuation, it can also can stems text using "porter" method and remove badwords (not current version).
 Object cleanedset is the output of this function.
 
-I write a script that contains functions for creating n-gram's
-Functions of one argument x which is a text string or collection of text strings
-Output is a saved file (data frame) in the working directory 
-A data frame with columns count, word1, ..., wordn.  
+I use kneser ney method that create a unigram continuation probability, bigram and bigram continuation probability and a trigram.   
 
 Then I create a model, maybe several models and test them.
 What my model should have as an input? A sentence or a set of words. 
 For each sentence my model should give a predicted next word.
-I think i will use model like k1*unigram+k2*bigram+k3*treegram, where k1+k2+k3=1, or maybe i can add a quadrogramm. 
 
