@@ -1,60 +1,36 @@
 ## here i create a function called "clean" which makes nessecery preparations to the argument
 # it takes a text string or collection of text strings and
-# remove foreign words, removing badwords,
+# split it into sentences,
+# remove smiles and foreign words
 # stripwhitespaces, remove numbers and punctuation, 
-# stems using "porter" method or not if lines are comment
-# file "badwords.txt" should exist in the working directory
+# add begining and end of the line
 # library tm and quanteda are necessary for transformation 
 # object cleanedset is the output of this function, it exists only in working environment
-#
 # cleanedset looks like this:
-# [1] "btw thank rt gonna dc anytim soon love see wai wai long"
-# [2] "get anoth dai skool due wonder snow wake thing"         
-# [3] "coo ju work hella tire r u ever cali"                   
-# [4] "need reconnect week"                                    
-# [5] "dammnnnnn catch"     
+# [1] "beginingofline how are you endofline"                                                                               
+# [2] "beginingofline btw thanks for the rt endofline"                                                                     
+# [3] "beginingofline you gonna be in dc anytime soon endofline"                                                           
+# [4] "beginingofline love to see you endofline"                                                                           
+# [5] "beginingofline been way way too long endofline"  
 
 library(tm)
 library(quanteda)
 
 clean <- function(x) {
 
-# removing foreign words
-for (i in 1:length(x)) {
-  line <- unlist(strsplit(x[i], split = " "))
-  line <- iconv(line, to = "ASCII", sub = "foreignword")
-  line <- line[!grepl("foreignword", line)]
-  line <- paste(line, collapse = " ")
-  x[i] <- line
-}
-rm(i, line)
-
-x <- tolower(x)
-## removing badwords
-con <- file("badwords.txt", "r")
-badwords <- readLines(con, skipNul = TRUE)
-close(con)
-x <- removeWords(x, words = badwords)
-rm(badwords, con)
-
-# x <- removeWords(x, words = stopwords("english")) 
-x <- removePunctuation(x)
-x <- removeNumbers(x)
-x <- stripWhitespace(x)
-x <- sub("^ ", "", x)
-x <- sub(" $", "", x)
-x <- x[!x ==""] # removing blank rows "5-th!" become "" after all
-
-cleanedset <<- x
-
-# following 8 lines stems or not if comments
-# x <- tokenize(x)
-# x <- wordstem(x, language = "porter")
-# x1 <- character(length(x))
-# for (i in 1:length(x)) {
-#   x1[i] <- paste(unlist(x[i]), collapse = " ")
-# }
-# cleanedset <<- x1
-# rm(x1, i)
-
+        x <- unlist(tokenize(x, what = "sentence"))
+        x <- tolower(x)
+        
+        for (i in 1:length(x)) {
+                line <- unlist(strsplit(x[i], split = " "))
+                line[grep("[^[:punct:]0-9a-z]", line)] <- "simbolnotword" # removing smiles
+                line[grep("[0-9]", line)] <- "wordwithnumber" # removing numbers
+                x[i] <- paste(line, collapse = " ")
+                x[i] <- paste("beginingofline", x[i], "endofline")
+        }
+        
+        x <- removePunctuation(x)
+        x <- stripWhitespace(x)
+        
+        cleanedset <<- x
 }
